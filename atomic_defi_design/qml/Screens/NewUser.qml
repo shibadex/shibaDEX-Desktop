@@ -37,13 +37,13 @@ SetupPage {
     function getNumberTh(num) {
         switch (num) {
             case 1:
-                return 'st'
+                return qsTr('st')
             case 2:
-                return 'nd'
+                return qsTr('nd')
             case 3:
-                return 'rd'
+                return qsTr('rd')
             default:
-                return 'th'
+                return qsTr('th')
         }
     }
 
