@@ -34,6 +34,19 @@ SetupPage {
         return current_mnemonic.split(" ")
     }
 
+    function getNumberTh(num) {
+        switch (num) {
+            case 1:
+                return 'st'
+            case 2:
+                return 'nd'
+            case 3:
+                return 'rd'
+            default:
+                return 'th'
+        }
+    }
+
     function setRandomGuessWord() {
         const prev_idx = current_word_idx
         while (current_word_idx === prev_idx)
@@ -489,7 +502,7 @@ SetupPage {
                 field.font: DexTypo.head6
                 field.horizontalAlignment: Qt.AlignLeft
                 field.leftPadding: 75
-                field.placeholderText: qsTr("Enter the %n. word", "", current_word_idx + 1)
+                field.placeholderText: qsTr("Enter the %n" + getNumberTh(current_word_idx + 1) + " word", "", current_word_idx + 1)
                 field.validator: RegExpValidator {
                     regExp: /[a-z]+/
                 }

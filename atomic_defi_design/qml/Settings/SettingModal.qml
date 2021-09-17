@@ -40,9 +40,24 @@ Qaterial.Dialog
                 dialog.close()
                 dialog.destroy()
             }
-        })
-        
+        })        
     }
+
+    function confirm_reset() {
+        let dialog = app.showText({
+                title: qsTr("Reset wallet configuration"),
+                text: qsTr("This will restart your wallet with default settings"),
+                standardButtons: Dialog.Yes | Dialog.Cancel,
+                yesButtonText: qsTr("Confirm"),
+                cancelButtonText: qsTr("Cancel"),
+                onAccepted: function() {
+                    restart_modal.open()
+                    restart_modal.item.onTimerEnded = () => { API.app.settings_pg.reset_coin_cfg() }
+                    dialog.close()  
+                }
+            })      
+    }
+
 
     readonly property string mm2_version: API.app.settings_pg.get_mm2_version()
     property var recommended_fiats: API.app.settings_pg.get_recommended_fiats()
@@ -231,18 +246,7 @@ Qaterial.Dialog
                                 title: qsTr("Reset wallet configuration")
                                 buttonText: qsTr("Reset")
                                 onClicked: {
-                                    dialog = app.showText({
-                                            title: qsTr("Reset wallet configuration"),
-                                            text: qsTr("This will restart your wallet with default settings"),
-                                            standardButtons: Dialog.Yes | Dialog.Cancel,
-                                            yesButtonText: qsTr("Confirm"),
-                                            cancelButtonText: qsTr("Cancel"),
-                                            onAccepted: function() {
-                                                restart_modal.open()
-                                                restart_modal.item.onTimerEnded = () => { API.app.settings_pg.reset_coin_cfg() }
-                                            }
-                                        })
-                                    dialog.close()
+                                    confirm_reset()
                                 }
                             }
                         }
