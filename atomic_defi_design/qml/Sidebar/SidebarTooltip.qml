@@ -7,10 +7,23 @@ import Qaterial 1.0 as Qaterial
 import App 1.0
 import "../Components"
 
+
 Qaterial.ToolTip
 {	
 	id: _control
+	property string tip_position: ""
 	property string text_value: ""
+	
+	function getPos(pos) {
+		console.log(pos)
+		switch(pos) {
+			case 'Top':
+				return Qaterial.Style.Position.Top
+			default: 
+				return Qaterial.Style.Position.Right
+		}
+	}
+
     contentItem: DexLabel {
 	   text: qsTr(_control.text_value)
        font: DexTypo.caption
@@ -19,5 +32,5 @@ Qaterial.ToolTip
 	}
 	visible: parent.mouse_area.containsMouse && !sidebar.expanded
 	background: FloatingBackground {auto_set_size: false}
-	position: Qaterial.Style.Position.Right
+	position: getPos(_control.tip_position)
 } 

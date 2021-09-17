@@ -5,6 +5,7 @@ import QtQuick.Controls 2.15
 import Qaterial 1.0 as Qaterial
 
 import QtGraphicalEffects 1.0
+import "../Sidebar"
 import "../Components"
 import "../Constants" as Constants
 import App 1.0
@@ -70,11 +71,12 @@ GradientRectangle {
             color: DexTheme.foregroundColor
         }
 
-        DefaultTooltip {
+        SidebarTooltip {
             visible: mouse_area.containsMouse
+            tip_position: "Top"
 
             contentItem: ColumnLayout {
-                DefaultText {
+                DexLabel {
                     text_value: name.replace(" (TESTCOIN)", "")
                     font.pixelSize: Constants.Style.textSizeSmall4
                 }
